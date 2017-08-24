@@ -1,0 +1,13 @@
+#IDE Files
+.idea
+*.iml
+
+# Built files
+target
+
+# Log file
+*.log
+
+# System files
+*~
+.DS_Store
