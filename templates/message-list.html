@@ -1,0 +1,40 @@
+<div class="content">
+    <div id="messagesDataTable" class="container-fluid">
+        <div class="message" ng-repeat="message in messages">
+            <label>Запись</label>
+            <div class="row">
+                <div class="col-md-12">
+                    <a target="_blank" ng-href="https://vk.com/{{getOwner(message.from_id).link}}">
+                        <img class="avatar" ng-src="{{getOwner(message.from_id).photo}}" />{{getOwner(message.from_id).name}}
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="padding-top-20" ng-bind-html="renderHtml(message.text)"></div>
+                    <img ng-src="{{getAttachPreview(attach)}}" ng-repeat="attach in message.attachments" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <p>{{formatDate(message.date)}}</p>
+                </div>
+                <div class="col-md-10"/>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button class="btn btn-warning" ng-click="repostMessage(message)">Repost</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid padding-top-20">
+        <div class="row">
+            <button class="btn btn-info" ng-click="getNextPage()" ng-disabled="isListFull">Ещё постов</button>
+        </div>
+        <div class="row">
+            <span>Загружено постов {{messages.length}}</span>|<span ng-show="isListFull" style="color: red;">Больше постов нет</span><br />
+        </div>
+    </div>
+
+</div>
