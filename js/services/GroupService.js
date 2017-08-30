@@ -22,6 +22,7 @@ app.factory('groupService', function ($q) {
         },
 
         getGroupList: function () {
+            console.log('querying groups');
             var groups;
             var query = {
                 extended: 1,
