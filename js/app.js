@@ -7,13 +7,6 @@ function getQueryStringValue(key) {
         + encodeURI(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
 }*/
 
-var availableGroups = [
-    {id: '152271532', name: 'Рукоделие'},
-    {id: '152271533', name: 'Рукоделие2'},
-];
-
-var defaultGroup = availableGroups[0];
-
 var app = angular.module('app', ['ngRoute']);
 
 app.config(function ($routeProvider) {

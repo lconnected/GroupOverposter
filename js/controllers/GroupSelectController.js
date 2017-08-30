@@ -1,10 +1,17 @@
 /**
  * Created by lconnected on 30/08/2017.
  */
-app.controller('app.groupSelectController', ['$scope', '$location', function ($scope, $location) {
+app.controller('app.groupSelectController', ['$scope', '$location', 'groupService', function ($scope, $location, groupService) {
+    let availGroups = groupService.getGroupList()
+        .map(function (group) {
+            return {
+                id: group.gid,
+                name: group.name
+            }
+        });
     $scope.data = {
-        availableOptions: availableGroups,
-        selectedOption: defaultGroup
+        availableOptions: availGroups,
+        selectedOption: availGroups[0]
     };
 
     $scope.update = function(newValue) {
