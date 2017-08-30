@@ -23,8 +23,8 @@ app.controller('GroupSelectController', ['$scope', '$location', 'groupService', 
 
     function updateGroupList(groups) {
         $scope.data = {
-            availableOptions: availGroups,
-            selectedOption: availGroups[0]
+            availableOptions: groups,
+            selectedOption: groups[0]
         };
     }
 
