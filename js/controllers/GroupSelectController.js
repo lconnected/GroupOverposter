@@ -7,11 +7,13 @@ app.controller('GroupSelectController', ['$scope', '$location', 'groupService', 
     let availGroups;
     if(groupService.online) {
         availGroups = groupService.getGroupList()
-            .map(function (group) {
-                return {
-                    id: group.gid,
-                    name: group.name
-                }
+            .then(function (data) {
+                availGroups = data.map(function (group) {
+                    return {
+                        id: group.gid,
+                        name: group.name
+                    }
+                });
             });
     } else {
         availGroups = [{id: 1, name: 'gus'}]; // stub
