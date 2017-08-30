@@ -2,7 +2,6 @@
  * Created by lconnected on 30/08/2017.
  */
 app.controller('GroupSelectController', ['$scope', '$location', 'groupService', function ($scope, $location, groupService) {
-    console.log('GroupSelectController init');
 
     if(groupService.online) {
         availGroups = groupService.getGroupList()
@@ -18,7 +17,8 @@ app.controller('GroupSelectController', ['$scope', '$location', 'groupService', 
                 updateGroupList(availGroups);
             });
     } else {
-        availGroups = [{id: 1, name: 'gus'}]; // stub
+        availGroups = [{id: 1, name: 'gus'}, {id: 23, name: 'kosar'}]; // stub
+        updateGroupList(availGroups);
     }
 
     function updateGroupList(groups) {
