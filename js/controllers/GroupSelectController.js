@@ -7,7 +7,9 @@ app.controller('GroupSelectController', ['$scope', '$location', 'groupService', 
     if(groupService.online) {
         availGroups = groupService.getGroupList()
             .then(function (data) {
-                var availGroups = data.map(function (group) {
+                var availGroups = data.filter(function (group) {
+                    return group.gid !== undefined;
+                }).map(function (group) {
                     return {
                         id: group.gid,
                         name: group.name
