@@ -22,9 +22,7 @@ app.factory('groupService', function ($q) {
         },
 
         getGroupList: function () {
-            console.log("service getGroupList");
-            var def = $q.defer();
-
+            var groups;
             var query = {
                 extended: 1,
                 filter: 'moder',
@@ -32,11 +30,10 @@ app.factory('groupService', function ($q) {
             };
             VK.api('groups.get', query,
                 function (data) {
-                    var resp = data.response;
-                    def.resolve(resp);
+                    groups = data.response;
                 });
 
-            return def.promise;
+            return groups;
         },
 
         getMessagesList: function (fromGroupId, offset, count) {
