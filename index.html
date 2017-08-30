@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" ng-app="app">
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
   <meta charset="UTF-8">
@@ -8,16 +8,12 @@
     <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
 </head>
 
-<body ng-app="app">
+<body>
     <div class="body-wrapper">
         <form>
-            <div ng-controller="app.groupSelectController">
+            <div ng-controller="GroupSelectController">
                 <div class="form-group">
-                    <label for="group-select">Выбор группы</label>
-                    <select id="group-select" class="form-control" ng-model="data.selectedOption"
-                            ng-options="option.name disable when option.disabled for option in data.availableOptions track by option.id"
-                            ng-change="update(data.selectedOption)">
-                    </select>
+                    <group-select/>
                 </div>
                 <div class="form-group">
                     <a class="btn btn-primary" ng-href="{{contextPath}}/#/{{data.selectedOption.id}}">Список постов</a>
@@ -35,21 +31,23 @@
     </div>
 
     <!-- VK js SDK -->
-    <script type="text/javascript" src="//vk.com/js/api/xd_connection.js?2"></script>
-    <script type="text/javascript" src="//vk.com/js/api/openapi.js"></script>
+    <script type="text/javascript" src="https://vk.com/js/api/xd_connection.js?2"></script>
+    <script type="text/javascript" src="https://vk.com/js/api/openapi.js"></script>
     <!-- UI -->
     <script src="lib/jquery/jquery-3.2.1.slim.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.js"></script>
     <!-- Angular -->
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.min.js"></script>
+    <!-- Modules -->
     <script type="text/javascript" charset="UTF-8" src="js/app.js"></script>
     <!-- Controllers -->
-    <script type="text/javascript" charset="UTF-8" src="js/controllers/MessageListController.js"></script>
     <script type="text/javascript" charset="UTF-8" src="js/controllers/GroupSelectController.js"></script>
+    <script type="text/javascript" charset="UTF-8" src="js/controllers/MessageListController.js"></script>
     <!-- Services -->
     <script type="text/javascript" charset="UTF-8" src="js/services/GroupService.js"></script>
-
+    <!-- Directives -->
+    <script type="text/javascript" charset="UTF-8" src="js/directives/GroupSelect.js"></script>
 
 </body>
 </html>

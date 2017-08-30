@@ -1,34 +1,19 @@
+// props
 contextPath = '/';
 appId = 6159447;
 
-/*
-function getQueryStringValue(key) {
-    return decodeURI(window.location.search.replace(new RegExp("^(?:.*[&\\?]"
-        + encodeURI(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
-}*/
-
+// app
 var app = angular.module('app', ['ngRoute']);
 
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/:groupId', {
             templateUrl: 'templates/message-list.html',
-            controller: 'app.messageListController'
+            controller: 'MessageListController'
         })
         .otherwise({
-            redirectTo: '/' + defaultGroup.id,
+            redirectTo: '/0',
             templateUrl: 'templates/message-list.html',
-            controller: 'app.messageListController'
+            controller: 'MessageListController'
         });
-        // route for the about page
-        // .when('/:groupId/one-post', {
-        //     templateUrl: 'templates/one-post.html',
-        //     controller: 'app.onePostController'
-        // })
-
-        // route for the contact page
-        // .when('/:groupId/search', {
-        //     templateUrl: 'templates/search.html',
-        //     controller: 'app.searchController'
-        // })
 });

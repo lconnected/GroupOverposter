@@ -1,0 +1,5 @@
+<label for="group-select">Выбор группы</label>
+<select id="group-select" class="form-control" ng-model="data.selectedOption"
+        ng-options="option.name disable when option.disabled for option in data.availableOptions track by option.id"
+        ng-change="update(data.selectedOption)">
+</select>
