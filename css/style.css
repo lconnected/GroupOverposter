@@ -1,0 +1,37 @@
+.main {
+    overflow-y: scroll;
+    height: 660px;
+    width: 885px;
+}
+
+a:hover {
+    background-color: #e4eaf0;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+img {
+    margin: 1px;
+}
+
+.metaInfo {
+    vertical-align: bottom;
+    /*color: darkgreen;*/
+    /*display: inline;*/
+    /*margin: 20px;*/
+}
+
+.metaInfo > a:hover {
+    text-decoration: none;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+}
+
+.padding-top-20 {
+    padding-top: 20px;
+}
