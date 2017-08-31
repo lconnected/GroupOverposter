@@ -41,9 +41,10 @@ app.factory('groupService', function ($q) {
         },
 
         getMessagesList: function (fromGroupId, offset, count) {
-            console.log("service");
+            if (fromGroupId == 0) {
+                return null;
+            }
             var def = $q.defer();
-
             var query = {
                 owner_id: -fromGroupId,
                 filter: "all",
@@ -52,9 +53,8 @@ app.factory('groupService', function ($q) {
                 count: count
             };
             VK.api('wall.get', query,
-                function (r) {
-                    var resp = r.response;
-                    def.resolve(resp);
+                function (data) {
+                    def.resolve(data.response);
                 });
 
             return def.promise;
