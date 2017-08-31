@@ -45,8 +45,8 @@ app.factory('groupService', function ($q) {
             var def = $q.defer();
 
             var query = {
-                owner_id: fromGroupId,
-                filter: "others",
+                owner_id: -fromGroupId,
+                filter: "all",
                 extended: 1,
                 offset: offset,
                 count: count

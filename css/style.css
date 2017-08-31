@@ -28,8 +28,17 @@ img {
 }
 
 .avatar {
-    width: 32px;
-    height: 32px;
+    width: 64px;
+    height: 64px;
+}
+
+.post-text {
+    display: inline;
+    vertical-align: bottom;
+}
+
+.right-side {
+    float: right;
 }
 
 .padding-top-20 {
