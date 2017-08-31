@@ -1,7 +1,10 @@
+.frame {
+    height: 607px;
+    width: 500px;
+}
+
 .main {
     overflow-y: scroll;
-    height: 660px;
-    width: 885px;
 }
 
 a:hover {
