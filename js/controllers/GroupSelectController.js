@@ -32,6 +32,7 @@ app.controller('GroupSelectController', ['$scope', '$location', 'groupService', 
             availableOptions: groups,
             selectedOption: groups[0]
         };
+        $location.path(CONTEXT_PATH + groups[0].id);
     }
 
     /**
@@ -39,6 +40,6 @@ app.controller('GroupSelectController', ['$scope', '$location', 'groupService', 
      * @param newValue
      */
     $scope.update = function(newValue) {
-        $location.path("/" + newValue.id)
+        $location.path(CONTEXT_PATH + newValue.id)
     }
 }]);
