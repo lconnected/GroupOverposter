@@ -5,7 +5,10 @@ app.controller('MessageListController', function ($scope, $controller, groupServ
     var messagesList = groupService.getMessagesList($routeParams.groupId, 0, 10);
     if (messagesList !== null) {
         messagesList.then(function (data) {
-            addMessages(data.wall);
+            var filteredPosts = data.wall.filter(function (wallPost) {
+                return wallPost.id !== undefined;
+            });
+            addMessages(filteredPosts);
         });
     }
     function addMessages(messages) {
