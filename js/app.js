@@ -1,8 +1,21 @@
-// props
-contextPath = '/';
-appId = 6159447;
+/**
+ * Created by lconnected.
+ */
+// properties
+/**
+ * Context path of the web application
+ * @type {string}
+ */
+const CONTEXT_PATH = '/';
+/**
+ * Application ID registered in vk.com
+ * @type {number}
+ */
+const APP_ID = 6159447;
 
-// app
+/**
+ * Variable stores angular module
+ */
 var app = angular.module('app', ['ngRoute']);
 
 app.config(function ($routeProvider) {

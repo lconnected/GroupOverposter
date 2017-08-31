@@ -1,4 +1,5 @@
 /**
+ * Service that provides data access to groups and group walls
  * Created by lconnected on 30/08/2017.
  */
 app.factory('groupService', function ($q) {
@@ -6,9 +7,12 @@ app.factory('groupService', function ($q) {
     var service = {
 
         data: {},
-        appID: appId,
+        appID: APP_ID,
         online: false,
 
+        /**
+         * Initialize vk api tunnel
+         */
         init: function () {
             try {
                 VK.init({apiId: this.appID});
@@ -18,10 +22,12 @@ app.factory('groupService', function ($q) {
             }
         },
 
+        /**
+         * Get managed groups for current user
+         * @returns {promise|e.promise}
+         */
         getGroupList: function () {
-            console.log('querying groups');
             var deferred = $q.defer();
-            var groups;
             var query = {
                 extended: 1,
                 filter: 'moder',
@@ -31,7 +37,6 @@ app.factory('groupService', function ($q) {
                 function fillGroups(data) {
                     deferred.resolve(data.response);
                 });
-
             return deferred.promise;
         },
 
@@ -123,9 +128,6 @@ app.factory('groupService', function ($q) {
 
             return def.promise;
         }
-        // }
-        // vk.init();
-        // return vk;
     };
     service.init();
     return service;

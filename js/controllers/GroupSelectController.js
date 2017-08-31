@@ -1,8 +1,10 @@
 /**
+ * Controls the available group list in view
  * Created by lconnected on 30/08/2017.
  */
 app.controller('GroupSelectController', ['$scope', '$location', 'groupService', function ($scope, $location, groupService) {
 
+    // Load available groups and call update methaod for view component
     if(groupService.online) {
         availGroups = groupService.getGroupList()
             .then(function (data) {
@@ -21,6 +23,10 @@ app.controller('GroupSelectController', ['$scope', '$location', 'groupService', 
         updateGroupList(availGroups);
     }
 
+    /**
+     * Updates groups list by new entities
+     * @param groups
+     */
     function updateGroupList(groups) {
         $scope.data = {
             availableOptions: groups,
@@ -28,6 +34,10 @@ app.controller('GroupSelectController', ['$scope', '$location', 'groupService', 
         };
     }
 
+    /**
+     * updates location when new group selected
+     * @param newValue
+     */
     $scope.update = function(newValue) {
         $location.path("/" + newValue.id)
     }
