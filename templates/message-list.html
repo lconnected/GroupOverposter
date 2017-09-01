@@ -7,7 +7,11 @@
                     <img class="avatar" ng-src="{{getOwner(message.from_id).photo}}"/>{{getOwner(message.from_id).name}}
                 </a>
                 <div class="post-text">{{message.text}}</div>
-                <img ng-src="{{getAttachPreview(attach)}}" ng-repeat="attach in message.attachments"/>
+            </div>
+            <div class="row">
+                <div ng-repeat="attachment in message.attachments">
+                    <img ng-src="{{attachment.photo.src}}"/>
+                </div>
             </div>
             <div class="row">
                 <button class="btn btn-warning right-side" ng-click="repostMessage(message)">Repost</button>
