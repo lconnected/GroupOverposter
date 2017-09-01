@@ -1,13 +1,9 @@
 .main {
-    overflow-y: scroll;
+    /*not yet*/
 }
 
-table {
-    border-collapse: collapse;
-}
-
-img {
-    margin: 1px;
+.body-wrapper {
+    overflow-y: visible;
 }
 
 .metaInfo {
