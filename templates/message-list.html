@@ -1,5 +1,5 @@
 <div class="content padding-top-20">
-    <div id="messagesDataTable" class="container-fluid">
+    <div id="messagesDataTable" class="container-fluid" infinite-scroll="loadMessages()" infinite-scroll-distance="1">
         <div class="message" ng-repeat="message in messages">
             <label>Запись от {{message.date | date : 'dd.MM.y h:mm:ss'}}</label>
             <div class="row">
