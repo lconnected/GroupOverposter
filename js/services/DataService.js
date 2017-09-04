@@ -46,7 +46,7 @@ app.factory('dataService', function ($q) {
             }
             var def = $q.defer();
             var query = {
-                owner_id: -fromGroupId,
+                owner_id: fromGroupId,
                 filter: "all",
                 extended: 1,
                 offset: offset,

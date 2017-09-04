@@ -12,7 +12,7 @@ app.controller('GroupSelectController', function ($scope, $location, dataService
                     return group.gid !== undefined;
                 }).map(function (group) {
                     return {
-                        id: group.gid,
+                        id: -group.gid,
                         name: group.name
                     }
                 });
