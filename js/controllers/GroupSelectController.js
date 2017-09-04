@@ -2,11 +2,11 @@
  * Controls the available group list in view
  * Created by lconnected on 30/08/2017.
  */
-app.controller('GroupSelectController', ['$scope', '$location', 'groupService', function ($scope, $location, groupService) {
+app.controller('GroupSelectController', function ($scope, $location, dataService) {
 
-    // Load available groups and call update methaod for view component
-    if(groupService.online) {
-        availGroups = groupService.getGroupList()
+    // Load available groups and call update method for view component
+    if(dataService.online) {
+        availGroups = dataService.getGroupList()
             .then(function (data) {
                 var availGroups = data.filter(function (group) {
                     return group.gid !== undefined;
@@ -42,4 +42,4 @@ app.controller('GroupSelectController', ['$scope', '$location', 'groupService', 
     $scope.update = function(newValue) {
         $location.path(CONTEXT_PATH + newValue.id)
     }
-}]);
+});

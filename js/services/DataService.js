@@ -2,7 +2,7 @@
  * Service that provides data access to groups and group walls
  * Created by lconnected on 30/08/2017.
  */
-app.factory('groupService', function ($q) {
+app.factory('dataService', function ($q) {
 
     var service = {
 
@@ -107,8 +107,8 @@ app.factory('groupService', function ($q) {
         },
 
         postMessage: function (toGroupId, message, attachments) {
-            var def = $q.defer();
-            message = stripEmoji(message.replace(/<br>/g, "\n"));
+            var deferred = $q.defer();
+            message = message.replace(/<br>/g, "\n");
             var requestParams = {
                 owner_id: toGroupId,
                 from_group: 1,
@@ -116,18 +116,42 @@ app.factory('groupService', function ($q) {
                 message: message
             };
 
-            if (!!attachments) {
+            if (attachments !== undefined) {
                 requestParams.attachments = this.getAttachmentsInString(attachments);
             }
 
             VK.api('wall.post', requestParams,
-                function (r) {
-                    var resp = r.response;
-                    def.resolve(resp);
+                function (response) {
+                    var resp = response.response;
+                    deferred.resolve(resp);
                 });
 
-            return def.promise;
+            return deferred.promise;
+        },
+
+        ranges: [
+            '\ud83c[\udf00-\udfff]', // U+1F300 to U+1F3FF
+            '\ud83d[\udc00-\ude4f]', // U+1F400 to U+1F64F
+            '\ud83d[\ude80-\udeff]'  // U+1F680 to U+1F6FF
+        ].join('|'),
+
+        /**
+         * removes emoji from text
+         * @param message text
+         * @returns {*|string|XML|void}
+         */
+        escapeEmoji: function(message) {
+            return message.replace(new RegExp(this.ranges, 'g'), '');
+        },
+
+        /**
+         * cuts message to fixed amount of words
+         * @param message
+         */
+        cutMessage: function (message) {
+            //TODO implement message cutting
         }
+
     };
     service.init();
     return service;

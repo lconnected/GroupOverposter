@@ -6,9 +6,10 @@
                 <a target="_blank" ng-href="https://vk.com/{{getOwner(message.from_id).link}}">
                     <img class="avatar" ng-src="{{getOwner(message.from_id).photo}}"/>{{getOwner(message.from_id).name}}
                 </a>
-                <div class="post-text">{{message.text}}</div>
+                <div class="post-text">{{formatMessage(message.text)}}</div>
             </div>
-            <div class="row">
+            <div class="row" ng-if="message.attachments != undefined">
+                <br/>
                 <div ng-repeat="attachment in message.attachments">
                     <img ng-src="{{attachment.photo.src}}"/>
                 </div>
@@ -16,6 +17,7 @@
             <div class="row">
                 <button class="btn btn-warning right-side" ng-click="repostMessage(message)">Repost</button>
             </div>
+            <hr/>
         </div>
     </div>
 
