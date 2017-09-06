@@ -1,5 +1,6 @@
 <div class="content padding-top-20">
-    <div id="messagesDataTable" class="container-fluid" infinite-scroll="loadMessages()" infinite-scroll-distance="1">
+    <div id="messagesDataTable" class="container-fluid">
+        <h2>Список постов</h2>
         <div class="message" ng-repeat="message in messages">
             <label>Запись от {{message.date | date : 'dd.MM.y h:mm:ss'}}</label>
             <div class="row">
@@ -18,6 +19,9 @@
                 <button class="btn btn-warning right-side" ng-click="repostMessage(message)">Repost</button>
             </div>
             <hr/>
+        </div>
+        <div class="row">
+            <button class="btn btn-info" ng-click="loadMessages()">Больше</button>
         </div>
     </div>
 
