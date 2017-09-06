@@ -7,7 +7,7 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
     $scope.messages = [];
 
     $scope.loadMessages = function () {
-        var messagesList = dataService.getMessagesList($routeParams.groupId, 0, 5);
+        var messagesList = dataService.getMessagesList($routeParams.groupId, $scope.lastPost, 5);
         if (messagesList !== null) {
             messagesList.then(function (data) {
                 var filteredPosts = data.wall
