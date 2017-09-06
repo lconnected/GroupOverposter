@@ -22,6 +22,7 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
             });
         }
     };
+    $scope.loadMessages();
 
     function addMessages(messages) {
         $scope.messages = $scope.messages.concat(messages);
