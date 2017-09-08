@@ -60,6 +60,34 @@ app.factory('dataService', function ($q) {
             return def.promise;
         },
 
+        getOwnerProfile: function (ownerId) {
+
+            let req;
+            let funcName;
+            if (ownerId < 0) {
+                //запрос информации по группе
+                req = {
+                    group_ids: -ownerId
+                };
+                funcName = 'groups.getById';
+            } else {
+                //по пользователю
+                req = {
+                    user_ids: ownerId,
+                    fields: 'photo_50'
+                };
+                funcName = 'users.get';
+            }
+
+            var resp;
+            VK.api(funcName, req,
+                function (data) {
+                    resp = (data.response);
+                });
+
+            return resp;
+        },
+
         getSearchList: function (fromGroupId, queryText, offset, count) {
             console.log("service");
             var def = $q.defer();

@@ -6,6 +6,9 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
     $scope.lastPost = 0;
     $scope.messages = [];
 
+    /**
+     * Загрузка сообщений на страницу
+     */
     $scope.loadMessages = function () {
         var messagesList = dataService.getMessagesList($routeParams.groupId, $scope.lastPost, 5);
         if (messagesList !== null) {
@@ -29,6 +32,11 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
         $scope.lastPost+=5;
     }
 
+    /**
+     * Форматирование сообщения, добавляет фразу, если текст отсутствует.
+     * @param message
+     * @returns {*}
+     */
     $scope.formatMessage = function (message) {
         let formattedMessage = dataService.escapeEmoji(message);
         if (!formattedMessage.length) {
@@ -38,6 +46,14 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
         }
     };
 
+    $scope.getOwner = function (ownerId) {
+        return dataService.getOwnerProfile(ownerId);
+    };
+
+    /**
+     * Создает новое сообщение
+     * @param message
+     */
     $scope.repostMessage = function (message) {
         let promise = dataService.postMessage($routeParams.groupId, message.text, message.attachments);
         promise.then(function (data) {
@@ -45,7 +61,6 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
                 + $routeParams.groupId
                 + '?w=wall-'
                 + $routeParams.groupId + '_' + data.response.post_id;
-            alert('Сообщение переопубликовано.');
         }).catch(function (err) {
             alert('Произошла ошибка');
         });
