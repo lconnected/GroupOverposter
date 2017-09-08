@@ -10,7 +10,7 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
      * Загрузка сообщений на страницу
      */
     $scope.loadMessages = function () {
-        var messagesList = dataService.getMessagesList($routeParams.groupId, $scope.lastPost, 5);
+        var messagesList = dataService.getMessagesList(-$routeParams.groupId, $scope.lastPost, 5);
         if (messagesList !== null) {
             messagesList.then(function (data) {
                 var filteredPosts = data.wall
@@ -62,7 +62,7 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
      * @param message
      */
     $scope.repostMessage = function (message) {
-        let promise = dataService.postMessage($routeParams.groupId, message.text, message.attachments);
+        let promise = dataService.postMessage(-$routeParams.groupId, message.text, message.attachments);
         promise.then(function (data) {
             let link = 'https://vk.com/public'
                 + $routeParams.groupId
