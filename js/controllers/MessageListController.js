@@ -28,6 +28,11 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
         }
     };
     $scope.loadMessages();
+    
+    function reloadMessages() {
+        $scope.messages = [];
+        $scope.loadMessages();
+    }
 
     function addMessages(messages) {
         $scope.messages = $scope.messages.concat(messages);
@@ -68,7 +73,7 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
                 + $routeParams.groupId
                 + '?w=wall-'
                 + $routeParams.groupId + '_' + data.post_id;
-            $scope.loadMessages();
+            reloadMessages();
         }).catch(function (err) {
             alert('Произошла ошибка');
         });
