@@ -20,7 +20,9 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
                 // making valid date
                 filteredPosts.forEach((msg) => {
                     msg.date *= 1000;
+                    getOwner(msg);
                 });
+
                 addMessages(filteredPosts);
             });
         }
@@ -31,6 +33,13 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
         $scope.messages = $scope.messages.concat(messages);
         $scope.lastPost+=5;
     }
+
+    function getOwner(message) {
+        return dataService.getAvatars(message.from_id).then(function (data) {
+            message.photo = data.photo_50;
+            message.ownerName = data.name || data.first_name;
+        });
+    };
 
     /**
      * Форматирование сообщения, добавляет фразу, если текст отсутствует.
@@ -44,10 +53,6 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
         } else {
             return formattedMessage;
         }
-    };
-
-    $scope.getOwner = function (ownerId) {
-        return dataService.getOwnerProfile(ownerId);
     };
 
     /**

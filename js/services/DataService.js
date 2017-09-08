@@ -60,7 +60,12 @@ app.factory('dataService', function ($q) {
             return def.promise;
         },
 
-        getOwnerProfile: function (ownerId) {
+        /**
+         * Дополнение сообщений аватарами
+         * @param ownerId
+         * @returns {*}
+         */
+        getAvatars: function (ownerId) {
 
             let req;
             let funcName;
@@ -79,13 +84,13 @@ app.factory('dataService', function ($q) {
                 funcName = 'users.get';
             }
 
-            var resp;
+            var deferred;
             VK.api(funcName, req,
                 function (data) {
-                    resp = (data.response);
+                    deferred.resolve(data.response);
                 });
 
-            return resp;
+            return deferred.promise();
         },
 
         getSearchList: function (fromGroupId, queryText, offset, count) {
