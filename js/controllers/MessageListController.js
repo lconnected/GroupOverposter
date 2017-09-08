@@ -36,8 +36,8 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
 
     function getOwner(message) {
         return dataService.getAvatars(message.from_id).then(function (data) {
-            message.photo = data.photo_50;
-            message.ownerName = data.name || data.first_name;
+            message.photo = data[0].photo;
+            message.ownerName = data[0].name || data[0].first_name;
         });
     }
 
