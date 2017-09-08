@@ -31,6 +31,7 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
     
     function reloadMessages() {
         $scope.messages = [];
+        $scope.lastPost = 0;
         $scope.loadMessages();
     }
 
