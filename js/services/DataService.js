@@ -90,7 +90,7 @@ app.factory('dataService', function ($q) {
                     deferred.resolve(data.response);
                 });
 
-            return deferred.promise();
+            return deferred.promise;
         },
 
         getSearchList: function (fromGroupId, queryText, offset, count) {

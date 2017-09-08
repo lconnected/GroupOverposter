@@ -39,7 +39,7 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
             message.photo = data.photo_50;
             message.ownerName = data.name || data.first_name;
         });
-    };
+    }
 
     /**
      * Форматирование сообщения, добавляет фразу, если текст отсутствует.
