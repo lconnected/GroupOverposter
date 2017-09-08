@@ -19,7 +19,7 @@ app.controller('GroupSelectController', function ($scope, $location, dataService
                 updateGroupList(availGroups);
             });
     } else {
-        availGroups = [{id: 1, name: 'gus'}, {id: 23, name: 'kosar'}]; // stub
+        availGroups = [{id: -1, name: 'gus'}, {id: -23, name: 'kosar'}]; // stub
         updateGroupList(availGroups);
     }
 
@@ -40,6 +40,6 @@ app.controller('GroupSelectController', function ($scope, $location, dataService
      * @param newValue
      */
     $scope.update = function(newValue) {
-        $location.path(CONTEXT_PATH + newValue.id)
+        $location.path(CONTEXT_PATH + -newValue.id)
     }
 });
