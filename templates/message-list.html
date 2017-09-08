@@ -5,7 +5,7 @@
             <label>Запись от {{message.date | date : 'dd.MM.y h:mm:ss'}}</label>
             <div class="row">
                 <!--<a target="_blank" ng-href="https://vk.com/{{getOwner(message).link}}">-->
-                    <img class="avatar" ng-src="{{message.meta.photo}}"/>{{message.meta.ownerName}}
+                    <img class="avatar" ng-src="{{message.meta.photo}}"/>&nbsp;{{message.meta.ownerName}}
                 <!--</a>-->
                 <div class="post-text">{{formatMessage(message.text)}}</div>
             </div>
