@@ -32,7 +32,7 @@ app.controller('GroupSelectController', function ($scope, $location, dataService
             availableOptions: groups,
             selectedOption: groups[0]
         };
-        $location.path(CONTEXT_PATH + groups[0].id);
+        $location.path(CONTEXT_PATH + -groups[0].id);
     }
 
     /**
