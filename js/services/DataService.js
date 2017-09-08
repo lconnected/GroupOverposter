@@ -84,7 +84,7 @@ app.factory('dataService', function ($q) {
                 funcName = 'users.get';
             }
 
-            var deferred;
+            var deferred = $q.defer();
             VK.api(funcName, req,
                 function (data) {
                     deferred.resolve(data.response);
