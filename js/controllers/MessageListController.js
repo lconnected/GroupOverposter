@@ -35,9 +35,11 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
     }
 
     function getOwner(message) {
-        return dataService.getAvatars(message.from_id).then(function (data) {
-            message.photo = data[0].photo;
-            message.ownerName = data[0].name || data[0].first_name;
+        return dataService.getMessageMetadata(message.from_id).then(function (data) {
+            message.meta = {
+                photo: data[0].photo,
+                ownerName: data[0].name || data[0].first_name
+            };
         });
     }
 
@@ -65,7 +67,8 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
             let link = 'https://vk.com/public'
                 + $routeParams.groupId
                 + '?w=wall-'
-                + $routeParams.groupId + '_' + data.response.post_id;
+                + $routeParams.groupId + '_' + data.post_id;
+            $scope.loadMessages();
         }).catch(function (err) {
             alert('Произошла ошибка');
         });

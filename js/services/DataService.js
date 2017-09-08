@@ -65,7 +65,7 @@ app.factory('dataService', function ($q) {
          * @param ownerId
          * @returns {*}
          */
-        getAvatars: function (ownerId) {
+        getMessageMetadata: function (ownerId) {
 
             let req;
             let funcName;
