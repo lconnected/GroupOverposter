@@ -43,8 +43,8 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
     function getOwner(message) {
         return dataService.getMessageMetadata(message.from_id).then(function (data) {
             message.meta = {
-                photo: data[0].photo,
-                ownerName: data[0].name || data[0].first_name
+                photo: data[0].photo || data[0].photo_50,
+                ownerName: data[0].name || (data[0].first_name + ' ' + data[0].last_name)
             };
         });
     }
