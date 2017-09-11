@@ -52,7 +52,7 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
                     let found = metaData.find(meta => {
                         return meta.id === msg.from_id;
                     });
-                    msg.meta = found[0];
+                    msg.meta = found;
                 });
 
             });
