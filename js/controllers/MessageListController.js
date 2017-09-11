@@ -43,7 +43,10 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
     }
 
     function getOwner(messageList) {
-        return dataService.getMessageMetadata(messageList)
+        let ownerIdList = messageList.map(msg => {
+           return msg.from_id;
+        });
+        return dataService.getMessageMetadata(ownerIdList)
             .then(function (metaData) {
                 messageList.forEach(msg => {
                     let found = metaData.find(meta => {
