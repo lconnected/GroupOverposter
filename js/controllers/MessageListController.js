@@ -50,7 +50,7 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
             .then(function (metaData) {
                 messageList.forEach(msg => {
                     let found = metaData.find(meta => {
-                        return meta.id === msg.from_id;
+                        return meta.id === Math.abs(msg.from_id);
                     });
                     msg.meta = found;
                 });
