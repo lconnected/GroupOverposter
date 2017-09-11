@@ -65,32 +65,81 @@ app.factory('dataService', function ($q) {
          * @param ownerId
          * @returns {*}
          */
-        getMessageMetadata: function (ownerId) {
+        getMessageMetadata: function (ownerIdList) {
 
-            let req;
-            let funcName;
-            if (ownerId < 0) {
-                //запрос информации по группе
-                req = {
-                    group_ids: -ownerId
-                };
-                funcName = 'groups.getById';
-            } else {
-                //по пользователю
-                req = {
-                    user_ids: ownerId,
+            /**
+             * Структура запроса на группы
+             * @type {{funcName: string, data: {group_ids: Array}}}
+             */
+            let groupsRequest = {
+                funcName: 'groups.getById',
+                request: {
+                    group_ids: []
+                }
+            };
+
+            /**
+             * Структура запроса для пользователей
+             * @type {{funcName: string, request: {user_ids: Array, fields: string}}}
+             */
+            let usersRequest = {
+                funcName: 'users.get',
+                request: {
+                    user_ids: [],
                     fields: 'photo_50'
-                };
-                funcName = 'users.get';
+                }
+            };
+
+            ownerIdList.forEach(item => {
+                if (item < 0) {
+                    groupsRequest.request.group_ids.push(-item);
+                } else {
+                    usersRequest.request.user_ids.push(item);
+                }
+            });
+
+            function groupsMeta() {
+                let qGroups = $q.defer();
+                VK.api(groupsRequest.funcName, groupsRequest.request,
+                    function (data) {
+                        qGroups.resolve(data.response);
+                    });
+                return qGroups.promise;
             }
 
-            var deferred = $q.defer();
-            VK.api(funcName, req,
-                function (data) {
-                    deferred.resolve(data.response);
-                });
+            function usersMeta() {
+                let qUsers = $q.defer();
+                VK.api(usersRequest.funcName, usersRequest.request,
+                    function (data) {
+                        qUsers.resolve(data.response);
+                    });
+                return qUsers.promise;
+            }
 
-            return deferred.promise;
+            let qResult = $q.defer();
+            let result = [];
+            groupsMeta()
+                .then(data => {
+                    data.forEach(item => {
+                        result.push({
+                            id: item.gid,
+                            photo: item.photo,
+                            ownerName: item.name
+                        });
+                    });
+                    return usersMeta();
+                })
+                .then(data => {
+                    data.forEach(item => {
+                        result.push({
+                            id: item.uid,
+                            photo: item.photo_50,
+                            ownerName: (item.first_name + ' ' + item.last_name)
+                        });
+                        qResult.resolve(result);
+                    });
+                });
+            return qResult.promise;
         },
 
         getSearchList: function (fromGroupId, queryText, offset, count) {
