@@ -65,7 +65,7 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
         dataService.getMetadataByUser(ownerIdList)
             .then(function (data) {
                 messageList.forEach(msg => {
-                    let found = data.find(meta => {
+                    let found = data.find(meta => { //TODO could be undefined ?!
                         return meta.uid === msg.from_id;
                     });
                     if (found !== undefined) {
