@@ -65,7 +65,7 @@ app.factory('dataService', function ($q) {
          * @param ownerId
          * @returns {*}
          */
-        getMessageMetadata: function (ownerIdList) {
+        getMetadataByGroup: function (ownerIdList) {
 
             /**
              * Структура запроса на группы
@@ -77,6 +77,27 @@ app.factory('dataService', function ($q) {
                     group_ids: []
                 }
             };
+
+            ownerIdList.forEach(item => {
+                if (item < 0) {
+                    groupsRequest.request.group_ids.push(-item);
+                }
+            });
+
+            let qGroups = $q.defer();
+            VK.api(groupsRequest.funcName, groupsRequest.request,
+                function (data) {
+                    qGroups.resolve(data.response);
+                });
+            return qGroups.promise;
+        },
+
+        /**
+         * Дополнение сообщений аватарами
+         * @param ownerId
+         * @returns {*}
+         */
+        getMetadataByUser: function (ownerIdList) {
 
             /**
              * Структура запроса для пользователей
@@ -91,55 +112,17 @@ app.factory('dataService', function ($q) {
             };
 
             ownerIdList.forEach(item => {
-                if (item < 0) {
-                    groupsRequest.request.group_ids.push(-item);
-                } else {
+                if (item >= 0) {
                     usersRequest.request.user_ids.push(item);
                 }
             });
 
-            function groupsMeta() {
-                let qGroups = $q.defer();
-                VK.api(groupsRequest.funcName, groupsRequest.request,
-                    function (data) {
-                        qGroups.resolve(data.response);
-                    });
-                return qGroups.promise;
-            }
-
-            function usersMeta() {
-                let qUsers = $q.defer();
-                VK.api(usersRequest.funcName, usersRequest.request,
-                    function (data) {
-                        qUsers.resolve(data.response);
-                    });
-                return qUsers.promise;
-            }
-
-            let qResult = $q.defer();
-            let result = [];
-            groupsMeta()
-                .then(data => {
-                    data.forEach(item => {
-                        result.push({
-                            id: item.gid,
-                            photo: item.photo,
-                            ownerName: item.name
-                        });
-                    });
-                    return usersMeta();
-                })
-                .then(data => {
-                    data.forEach(item => {
-                        result.push({
-                            id: item.uid,
-                            photo: item.photo_50,
-                            ownerName: (item.first_name + ' ' + item.last_name)
-                        });
-                        qResult.resolve(result);
-                    });
+            let qUsers = $q.defer();
+            VK.api(usersRequest.funcName, usersRequest.request,
+                function (data) {
+                    qUsers.resolve(data.response);
                 });
-            return qResult.promise;
+            return qUsers.promise;
         },
 
         getSearchList: function (fromGroupId, queryText, offset, count) {

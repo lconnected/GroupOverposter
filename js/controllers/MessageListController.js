@@ -46,16 +46,38 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
         let ownerIdList = messageList.map(msg => {
            return msg.from_id;
         });
-        return dataService.getMessageMetadata(ownerIdList)
-            .then(function (metaData) {
+        dataService.getMetadataByGroup(ownerIdList)
+            .then(function (data) {
                 messageList.forEach(msg => {
                     let found = metaData.find(meta => {
-                        return meta.id === Math.abs(msg.from_id);
+                        return meta.gid === Math.abs(msg.from_id);
                     });
-                    msg.meta = found;
+                    if (found !== undefined) {
+                        msg.meta = {
+                            id: found.gid,
+                            photo: found.photo,
+                            ownerName: found.name
+                        };
+                    }
                 });
-
             });
+
+        dataService.getMetadataByUser(ownerIdList)
+            .then(function (data) {
+                messageList.forEach(msg => {
+                    let found = metaData.find(meta => {
+                        return meta.uid === msg.from_id;
+                    });
+                    if (found !== undefined) {
+                        msg.meta = {
+                            id: found.uid,
+                            photo: found.photo_50,
+                            ownerName: (found.first_name + ' ' + found.last_name)
+                        };
+                    }
+                });
+            });
+
     }
 
     /**
