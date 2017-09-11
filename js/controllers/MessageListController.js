@@ -20,9 +20,9 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
                 // making valid date
                 filteredPosts.forEach((msg) => {
                     msg.date *= 1000;
-                    getOwner(msg);
                 });
 
+                loadMessagesMetadata(filteredPosts);
                 addMessages(filteredPosts);
             });
         }
@@ -42,7 +42,7 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
         $scope.lastPost+=messages.length;
     }
 
-    function getOwner(messageList) {
+    function loadMessagesMetadata(messageList) {
         let ownerIdList = messageList.map(msg => {
            return msg.from_id;
         });
