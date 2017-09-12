@@ -2,12 +2,17 @@
     <div id="messagesDataTable" class="container-fluid">
         <h2>Список постов</h2>
         <div class="message" ng-repeat="message in messages">
-            <label>Запись от {{message.date | date : 'dd.MM.y h:mm:ss'}}</label>
             <div class="row">
                 <!--<a target="_blank" ng-href="https://vk.com/{{getOwner(message).link}}">-->
-                    <img class="avatar" ng-src="{{message.meta.photo}}"/>&nbsp;{{message.meta.ownerName}}
+                    <img class="avatar object-meta" ng-src="{{message.meta.photo}}"/>
+                    <div class="object-meta">
+                        <p class="meta-name">{{message.meta.ownerName}}</p>
+                        <p class="meta-date">{{message.date | date : 'dd.MM.y h:mm:ss'}}</p>
+                    </div>
                 <!--</a>-->
-                <div class="post-text">{{formatMessage(message.text)}}</div>
+            </div>
+            <div class="row post-text">
+                <div>{{formatMessage(message.text)}}</div>
             </div>
             <div class="row" ng-if="message.attachments != undefined">
                 <br/>
