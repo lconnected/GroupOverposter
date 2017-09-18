@@ -24,6 +24,10 @@ app.config(function ($routeProvider) {
             templateUrl: 'templates/message-list.html',
             controller: 'MessageListController'
         })
+        .when('/:groupId/search', {
+            templateUrl: 'templates/search.html',
+            controller: 'SearchController'
+        })
         .otherwise({
             redirectTo: '/0',
             templateUrl: 'templates/message-list.html',

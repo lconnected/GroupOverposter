@@ -64,18 +64,20 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
 
         dataService.getMetadataByUser(ownerIdList)
             .then(function (data) {
-                messageList.forEach(msg => {
-                    let found = data.find(meta => { //TODO could be undefined ?!
-                        return meta.uid === msg.from_id;
+                if (data !== undefined) {
+                    messageList.forEach(msg => {
+                        let found = data.find(meta => {
+                            return meta.uid === msg.from_id;
+                        });
+                        if (found !== undefined) {
+                            msg.meta = {
+                                id: found.uid,
+                                photo: found.photo_50,
+                                ownerName: (found.first_name + ' ' + found.last_name)
+                            };
+                        }
                     });
-                    if (found !== undefined) {
-                        msg.meta = {
-                            id: found.uid,
-                            photo: found.photo_50,
-                            ownerName: (found.first_name + ' ' + found.last_name)
-                        };
-                    }
-                });
+                }
             });
 
     }
