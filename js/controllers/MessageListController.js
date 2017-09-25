@@ -31,13 +31,11 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
     // todo remove stub
     // addMessages(JSON.parse("[{\"id\":3,\"from_id\":97384177,\"to_id\":-153151145,\"date\":1505043607000,\"marked_as_ads\":0,\"post_type\":\"post\",\"text\":\"Poker Stars\",\"can_delete\":1,\"attachment\":{\"type\":\"photo\",\"photo\":{\"pid\":456239017,\"aid\":-7,\"owner_id\":-153151145,\"user_id\":100,\"src\":\"https://pp.userapi.com/c840733/v840733510/59c0/RT_N649y-aA.jpg\",\"src_big\":\"https://pp.userapi.com/c840733/v840733510/59c1/3j6BcJ83ttw.jpg\",\"src_small\":\"https://pp.userapi.com/c840733/v840733510/59bf/WQnmX5eQgqQ.jpg\",\"src_xbig\":\"https://pp.userapi.com/c840733/v840733510/59c2/hz2tIpI9ExA.jpg\",\"src_xxbig\":\"https://pp.userapi.com/c840733/v840733510/59c3/TxYsNswELxk.jpg\",\"src_xxxbig\":\"https://pp.userapi.com/c840733/v840733510/59c4/yx4wkgvrie4.jpg\",\"width\":1620,\"height\":2160,\"text\":\"\",\"created\":1505043607,\"post_id\":3,\"access_key\":\"729eaadb10113fdef6\"}},\"attachments\":[{\"type\":\"photo\",\"photo\":{\"pid\":456239017,\"aid\":-7,\"owner_id\":-153151145,\"user_id\":100,\"src\":\"https://pp.userapi.com/c840733/v840733510/59c0/RT_N649y-aA.jpg\",\"src_big\":\"https://pp.userapi.com/c840733/v840733510/59c1/3j6BcJ83ttw.jpg\",\"src_small\":\"https://pp.userapi.com/c840733/v840733510/59bf/WQnmX5eQgqQ.jpg\",\"src_xbig\":\"https://pp.userapi.com/c840733/v840733510/59c2/hz2tIpI9ExA.jpg\",\"src_xxbig\":\"https://pp.userapi.com/c840733/v840733510/59c3/TxYsNswELxk.jpg\",\"src_xxxbig\":\"https://pp.userapi.com/c840733/v840733510/59c4/yx4wkgvrie4.jpg\",\"width\":1620,\"height\":2160,\"text\":\"\",\"created\":1505043607,\"post_id\":3,\"access_key\":\"729eaadb10113fdef6\"}}],\"comments\":{\"count\":0},\"likes\":{\"count\":0},\"reposts\":{\"count\":0}},{\"id\":2,\"from_id\":11089496,\"to_id\":-153151145,\"date\":1505043589000,\"marked_as_ads\":0,\"post_type\":\"post\",\"text\":\"Пепси девять Карл кошмар\",\"can_delete\":1,\"comments\":{\"count\":0},\"likes\":{\"count\":0},\"reposts\":{\"count\":0}},{\"id\":1,\"from_id\":-153151145,\"to_id\":-153151145,\"date\":1504879607000,\"marked_as_ads\":0,\"post_type\":\"post\",\"text\":\"фывфыв\",\"can_delete\":1,\"can_pin\":1,\"comments\":{\"count\":0},\"likes\":{\"count\":0},\"reposts\":{\"count\":0}}]"));
     
-    function reloadMessages() {
+    $scope.reloadMessages = function() {
         $scope.messages = [];
         $scope.lastPost = 0;
         $scope.loadMessages();
-    }
-
-    reloadMessages();
+    };
 
     function addMessages(messages) {
         $scope.messages = $scope.messages.concat(messages);
@@ -114,4 +112,6 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
             alert('Произошла ошибка');
         });
     };
+
+    $scope.reloadMessages();
 });

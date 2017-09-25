@@ -1,0 +1,10 @@
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <label for="in-post">Текст для поиска</label>
+            <input id="in-post" type="text" ng-model="searchText" ng-keyup="refresh()">
+            <button class="btn btn-info" ng-click="loadMessages()">Поиск</button>
+        </div>
+    </div>
+    <ng-include src=" 'templates/message-list.html' "></ng-include>
+</div>

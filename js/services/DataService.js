@@ -125,8 +125,15 @@ app.factory('dataService', function ($q) {
             return qUsers.promise;
         },
 
+        /**
+         * Вызов функции поиска постов
+         * @param fromGroupId
+         * @param queryText
+         * @param offset
+         * @param count
+         * @returns {Promise}
+         */
         getSearchList: function (fromGroupId, queryText, offset, count) {
-            console.log("service");
             var def = $q.defer();
 
             var query = {

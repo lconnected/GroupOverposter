@@ -1,23 +1,38 @@
 /**
  * Created by lconnected on 30/08/2017.
  */
-app.controller('SearchController', function ($scope, $controller, $routeParams, dataService) {
-        $controller('app.baseListController', {$scope: $scope});
+app.controller('SearchController', function ($controller, $scope, $routeParams, dataService) {
+    // $log('hello search');
+    $controller('MessageListController', {$scope: $scope});
 
-        $scope.queryText = "";
+    $scope.searchText = "";
 
-        $scope.search = function (keyEvent) {
-            if (keyEvent.which === 13) {
-                $scope.messages = [];
-                $scope.groups = [];
-                $scope.profiles = [];
-                $scope.isListFull = false;
-                $scope.getNextPage();
-            }
-        };
+    /**
+     * Загрузка сообщений на страницу
+     */
+    $scope.loadMessages = function () {
+        var messagesList = dataService.getSearchList(-$routeParams.groupId, $scope.searchText, $scope.lastPost, 5);
+        if (messagesList !== null) {
+            messagesList.then(function (data) {
+                var filteredPosts = data.wall
+                    .filter(function (wallPost) {
+                        return wallPost.id !== undefined;
+                    });
+                // making valid date
+                filteredPosts.forEach((msg) => {
+                    msg.date *= 1000;
+                });
 
-        $scope.searchApi = function () {
-            return groupServiceFactory(parseInt($routeParams.groupId))
-                .getSearchList($scope.queryText, $scope.messages.length, $scope.pageSize)
-        };
-    });
+                loadMessagesMetadata(filteredPosts);
+                addMessages(filteredPosts);
+            });
+        }
+    };
+
+    $scope.refresh = function () {
+        $scope.messages = [];
+        $scope.lastPost = 0;
+    };
+
+    $scope.reloadMessages();
+});
