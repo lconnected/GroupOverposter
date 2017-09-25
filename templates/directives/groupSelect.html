@@ -6,7 +6,7 @@
     </select>
 </div>
 <div class="form-group">
-    <a class="btn btn-primary" ng-href="/!{{-data.selectedOption.id}}">Список постов</a>
+    <button class="btn btn-primary" ng-click="update(data.selectedOption)">Список постов</button>
     <!--<a class="btn btn-primary disabled" ng-href="{{contextPath}}/#/{{data.selectedOption.id}}/one-post">Репост по-->
         <!--ссылке</a>-->
     <a class="btn btn-primary" ng-href="#!{{-data.selectedOption.id}}/search">Поиск по постам</a>
