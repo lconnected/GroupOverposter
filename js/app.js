@@ -29,8 +29,6 @@ app.config(function ($routeProvider) {
             controller: 'SearchController'
         })
         .otherwise({
-            redirectTo: '/0',
-            templateUrl: 'templates/message-list.html',
-            controller: 'MessageListController'
+            templateUrl: 'templates/not_found.html',
         });
 });
