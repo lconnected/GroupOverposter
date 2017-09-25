@@ -37,12 +37,12 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
         $scope.loadMessages();
     };
 
-    function addMessages(messages) {
+    $scope.addMessages = function(messages) {
         $scope.messages = $scope.messages.concat(messages);
         $scope.lastPost+=messages.length;
     }
 
-    function loadMessagesMetadata(messageList) {
+    $scope.loadMessagesMetadata = function(messageList) {
         let ownerIdList = messageList.map(msg => {
            return msg.from_id;
         });
