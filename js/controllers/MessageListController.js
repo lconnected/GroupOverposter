@@ -22,8 +22,8 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
                     msg.date *= 1000;
                 });
 
-                loadMessagesMetadata(filteredPosts);
-                addMessages(filteredPosts);
+                $scope.loadMessagesMetadata(filteredPosts);
+                $scope.addMessages(filteredPosts);
             });
         }
     };

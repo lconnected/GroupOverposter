@@ -23,8 +23,8 @@ app.controller('SearchController', function ($controller, $scope, $routeParams, 
                     msg.date *= 1000;
                 });
 
-                loadMessagesMetadata(filteredPosts);
-                addMessages(filteredPosts);
+                $scope.loadMessagesMetadata(filteredPosts);
+                $scope.addMessages(filteredPosts);
             });
         }
     };
