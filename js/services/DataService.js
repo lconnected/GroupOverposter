@@ -181,6 +181,7 @@ app.factory('dataService', function ($q) {
         postMessage: function (toGroupId, message, attachments) {
             var deferred = $q.defer();
             message = message.replace(/<br>/g, "\n");
+            message = this.escapeEmoji(message);
             var requestParams = {
                 owner_id: toGroupId,
                 from_group: 1,
