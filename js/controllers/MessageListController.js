@@ -107,7 +107,7 @@ app.controller('MessageListController', function ($scope, $controller, dataServi
                 + $routeParams.groupId
                 + '?w=wall-'
                 + $routeParams.groupId + '_' + data.post_id;
-            reloadMessages();
+            $scope.reloadMessages();
         }).catch(function (err) {
             alert('Произошла ошибка');
         });
